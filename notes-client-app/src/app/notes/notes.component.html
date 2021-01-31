@@ -1,0 +1,146 @@
+<div class="container page-content">
+  <div class="row">
+    <div class="col-sm">
+      <h1 class="title">Your Notes</h1>
+    </div>
+  </div>
+  
+  
+
+	<table class="table table-hover">
+		<thead class="headstyle">
+			<tr>
+			  <th class="th-element" (click)="sortByTitle()">Title <i class="fa fa-sort-asc" aria-hidden="true" style="margin-left:5px"></i> </th>
+			  <th class="th-element" (click)="sortByDateCreated()">Date Created <i class="fa fa-sort-desc" aria-hidden="true" style="margin-left:5px"></i> </th>
+			  <th class="th-element" (click)="sortByDateModified()">Date Modified <i class="fa fa-sort-desc" aria-hidden="true" style="margin-left:5px"></i> </th>
+			  <th></th>
+			</tr>
+		</thead>
+		<tbody>
+		  <tr class="tablerow"*ngFor="let note of rows">
+			<td class="hover-color" (click)="readNote(note,notemodal2)">{{ note.title }}</td>
+			<td>{{ note.datecreated | date: 'mediumDate'}}</td>
+			<td>{{ note.datemodified | date: 'medium'}}</td>
+			<td class="noterow">
+				<button type="button" class="btn btn-danger" (click)="deleteNote(note)"><i class="fa fa-trash"></i></button>
+			</td>
+		  </tr>
+
+		</tbody>
+	</table>
+	
+	
+	<!-- ----- EDIT NOTE TEMPLATE ----- -->	
+	<ng-template #notemodal>
+	  <div class="modal-header">
+		<h4 class="modal-title pull-left">Edit Note</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <div class="modal-body">
+		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+		  <div class="form-group full-width-input">
+			<label>Title</label>
+			<input class="form-control" placeholder="Title" formControlName="title" required>
+		  </div>
+		  <div class="form-group full-width-input">
+			<label>Text Content</label>
+			<textarea class="form-control" style="overflow-wrap:break-word" formControlName="content" rows=10></textarea>
+		  </div>
+		  <div class="button-row">
+			<button type="button" class="btn btn-primary" (click)="modalCallback()">Save</button>
+			<button type="button" class="btn btn-light" (click)="onCancel(notemodal2)">Cancel</button>
+		  </div>
+		</form>
+	  </div>
+	</ng-template>
+
+
+	
+	
+	<!-- ----- READ NOTE TEMPLATE ----- -->	
+	<ng-template #notemodal2>
+	  <div class="modal-header">
+		<h4 class="modal-title pull-left">Note</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <div class="modal-body">
+		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+		  <div class="form-group full-width-input">
+			<label>Title</label>
+			<input class="read-note" style="overflow-wrap:break-word" placeholder="Title" formControlName="title" readonly="readonly">
+		  </div>
+		  <div class="form-group full-width-input">
+			<label>Text Content</label>
+			<textarea class="read-note" style="overflow-wrap:break-word" formControlName="content" rows=10 readonly="readonly"></textarea>
+		  </div>
+		  <div class="button-row">
+			<button type="button" class="btn btn-primary" (click)="showArchive(notemodal3)">File History <i style="margin-left:5px" class="fa fa-archive" aria-hidden="true"></i> </button>
+			<button type="button" class="btn btn-primary" (click)="editNote(notemodal)">Editor<i style="margin-left:10px" class="fa fa-edit"></i></button>
+		  </div>
+		</form>
+	  </div>
+	</ng-template>
+	
+	<!-- ----- ARCHIVE MODAL TABLE ----- -->
+	<ng-template #notemodal3>
+	  <div class="modal-header">
+		<h4 class="modal-title pull-left">Old versions of Note</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+				  <th></th>
+				  <th>Version</th>
+				  <th>Date Modified</th>
+				</tr>
+			</thead>
+			<tbody>
+			  <tr class="tablerow"*ngFor="let note of archiveRows">
+				<td class="noterow">
+					<button type="button" class="btn btn-primary" (click)="readArchiveNote(note,notemodal4)"><i class="fa fa-sticky-note-o"></i></button>
+				</td>
+				<td>{{ note.version }}</td>
+				<td>{{ note.datemodified | date: 'short'}}</td>
+			  </tr>
+
+			</tbody>
+		</table>
+	</ng-template>
+
+	
+	<!-- ----- READ NOTE FROM ARCHIVE TEMPLATE ----- -->	
+	<ng-template #notemodal4>
+	  <div class="modal-header">
+		<h4 class="modal-title pull-left">Note</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <div class="modal-body">
+		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+		  <div class="form-group full-width-input">
+			<label>Title</label>
+			<input class="read-note" style="overflow-wrap:break-word" placeholder="Title" formControlName="title" readonly="readonly">
+		  </div>
+		  <div class="form-group full-width-input">
+			<label>Text Content</label>
+			<textarea class="read-note" style="overflow-wrap:break-word" formControlName="content" rows=10 readonly="readonly"></textarea>
+		  </div>
+		  <div class="button-row">
+			<button type="button" class="btn btn-primary" (click)="showArchive(notemodal3)">RETURN TO ARCHIVE <i style="margin-left:5px" class="fa fa-archive" aria-hidden="true"></i>  </button>
+		  </div>
+		</form>
+	  </div>
+	</ng-template>
+	
+
+
+
+</div>

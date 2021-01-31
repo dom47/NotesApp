@@ -1,0 +1,8 @@
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+h1 {
+  margin-top: 50px;
+  text-align: center;
+}
