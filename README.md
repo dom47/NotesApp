@@ -10,7 +10,9 @@ To run this project you will need npm package manager, MySQL and Angular CLI.
 Install MySQL.
 Then you need to start the MySQL Server and connect. to do this cd to /bin/ of your MySQL server and run mysqld
 Then connect to the server by typing in the following command:
+
 mysql -u root -p
+
 Type in your MySQL root password.
 Then open the MySQL Command Line Client. 
 In MySQL Command Line Client type in the password you established during setup when you were installing MySQL.
