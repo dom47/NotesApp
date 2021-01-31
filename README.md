@@ -5,7 +5,7 @@ The project uses MySQL, Express.JS, Angular and Node.JS
 To run this project you will need npm package manager, MySQL and Angular CLI.
 
 ---------------------------------------------------------------------------------------------------------------
- To set up the database ------------------------------------------------------------------------------------
+ To set up the database 
 ---------------------------------------------------------------------------------------------------------------
 Install MySQL.
 Then you need to start the MySQL Server and connect. to do this cd to /bin/ of your MySQL server and run mysqld
@@ -23,14 +23,14 @@ Example of the above mentioned command:
 source C:\Users\UserName\Desktop\NotesApp\database-setup.sql
 
 ---------------------------------------------------------------------------------------------------------------
- To run the server app -------------------------------------------------------------------------------------
+ To run the server app 
 ---------------------------------------------------------------------------------------------------------------
 cd into the notes-server directory on your local hard drive and then run the command below:
 
 npm install && npm start
 
 ---------------------------------------------------------------------------------------------------------------
- To run the client app -------------------------------------------------------------------------------------
+ To run the client app 
 ---------------------------------------------------------------------------------------------------------------
 cd into notes-client-app directory and then run the commands below:
 
