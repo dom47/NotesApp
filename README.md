@@ -37,4 +37,5 @@ npm install && npm start
 cd into notes-client-app directory and then run the commands below:
 
 npm install
+
 ng serve --open
